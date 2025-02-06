@@ -1,0 +1,56 @@
+{
+  "name": "starknet-wallet-simulator",
+  "version": "1.0.0",
+  "description": "Starknet.js WalletAccount simulator",
+  "types": "dist/types/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.mjs",
+      "default": "./dist/esm/index.mjs"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "!**/*.tsbuildinfo",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "compile": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
+    "build:clean": "rm -rf ./dist",
+    "build": "npm run build:clean && npm run compile && npm run rename:esm",
+    "rename:esm": "bash ./scripts/fix-mjs.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhilippeR26/wallet-simulator.js.git"
+  },
+  "keywords": [
+    "starknet",
+    "walletAccount",
+    "simulator",
+    "test"
+  ],
+  "author": "Philippe ROSTAN",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PhilippeR26/wallet-simulator.js/issues"
+  },
+  "homepage": "https://github.com/PhilippeR26/wallet-simulator.js#readme",
+  "devDependencies": {
+    "cross-port-killer": "^1.4.0",
+    "starknet-devnet": "^0.2.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@starknet-io/types-js": "^0.7.10",
+    "starknet": "^6.23.0"
+  }
+}

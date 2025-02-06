@@ -1,0 +1,1 @@
+export const BaseApiVersion: string = "0.7" as const;
