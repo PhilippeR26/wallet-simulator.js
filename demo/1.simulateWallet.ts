@@ -2,8 +2,8 @@
 // Launch with npx ts-node demo/simulateWallet.ts
 // Coded with Starknet.js v6.23.0
 
-import { Account, RpcProvider, shortString, WalletAccount } from "starknet";
-import { DEVNET_MAINNET_PORT, DEVNET_TESTNET_PORT, DEVNET_VERSION } from "./utils/constants";
+import { Account, CallData, Contract, RpcProvider, shortString, WalletAccount } from "starknet";
+import { DEVNET_MAINNET_PORT, DEVNET_TESTNET_PORT, DEVNET_VERSION, strkAddress } from "./utils/constants";
 import { Devnet } from "starknet-devnet";
 import fs from "fs";
 import cp from "child_process";
@@ -58,6 +58,7 @@ async function main() {
     // initialize existing predeployed account 0 of Devnet
     const devnetTestnetAccounts = await devnetTestnet.provider.getPredeployedAccounts();
     const account0Testnet = new Account(myProviderDevnetTestnet, devnetTestnetAccounts[0].address, devnetTestnetAccounts[0].private_key);
+    const account1Testnet = new Account(myProviderDevnetTestnet, devnetTestnetAccounts[1].address, devnetTestnetAccounts[1].private_key);
     console.log("Account 0 Testnet connected.\nAddress =", account0Testnet.address, "\n");
     const devnetMainnetAccounts = await devnetMainnet.provider.getPredeployedAccounts();
     const account1Mainnet = new Account(myProviderDevnetMainnet, devnetMainnetAccounts[1].address, devnetMainnetAccounts[1].private_key);
@@ -68,10 +69,15 @@ async function main() {
     const swoSimulation: WALLET_API.StarknetWindowObject = new WalletSimulator(myProviderDevnetMainnet, myProviderDevnetTestnet, account1Mainnet, account0Testnet, selectedWallet);
     const myWalletAccount: WalletAccount = await WalletAccount.connect(myProviderDevnetTestnet, swoSimulation);
     const currentChainId = await myWalletAccount.getChainId();
-    console.log({currentChainId});
-    console.log("WA.addr :",myWalletAccount.address);
-    console.log("WA.requestAccounts :",myWalletAccount.requestAccounts());
-    
+    console.log({ currentChainId });
+    console.log("WA.addr :", myWalletAccount.address);
+    console.log("WA.requestAccounts :", await myWalletAccount.requestAccounts());
+
+    const strkSierra = await myProviderDevnetMainnet.getClassAt(strkAddress);
+    const strkContract = new Contract(strkSierra.abi, strkAddress);
+    const myCall = strkContract.populate("transfer", { recipient: account1Testnet.address, amount: 50000000n });
+    const resp = await myWalletAccount.execute(myCall);
+    console.log(resp);
 
     // ****** Close devnets *******
     outputStreamTestnet.end();

@@ -1,4 +1,4 @@
-Forking from block: number=1129643, hash=0x68735ab634274222e1df7d03db08cb4a70b144607cb0349705d3fe320309359
+Forking from block: number=1143324, hash=0x3d9a6dce3114659fb9b7c71bff05be622f5dca3757061901198672a5d4f8049
 Predeployed FeeToken
 ETH Address: 0x49D36570D4E46F48E99674BD3FCC84644DDD6B96F7C741B1562B82F9E004DC7
 Class Hash: 0x7F3777C99F3700505EA966676AAC4A0D692C2A9F5E667F4C606B51CA1DD3420
@@ -54,7 +54,8 @@ Chain ID: SN_MAIN (0x534e5f4d41494e)
 Predeployed accounts using class with hash: 0x061dac032f228abef9c6626f995015233097ae253a7f72d68552db02f2971b8f
 Initial balance of each account: 1000000000000000000000 WEI and FRI
 Seed to replicate this account sequence: 0
-[2m2025-02-06T09:18:43.564842Z[0m [32m INFO[0m [2mstarknet_devnet[0m[2m:[0m Starknet Devnet listening on 127.0.0.1:5160
-[2m2025-02-06T09:18:43.600690Z[0m [32m INFO[0m [2mrpc[0m[2m:[0m received method in on_request starknet_chainId
-[2m2025-02-06T09:18:43.610588Z[0m [32m INFO[0m [2mrpc[0m[2m:[0m received method in on_request starknet_specVersion
-[2m2025-02-06T09:18:43.634353Z[0m [32m INFO[0m [2mrpc[0m[2m:[0m received method in on_request devnet_getPredeployedAccounts
+[2m2025-02-11T10:43:51.053654Z[0m [32m INFO[0m [2mstarknet_devnet[0m[2m:[0m Starknet Devnet listening on 127.0.0.1:5160
+[2m2025-02-11T10:43:51.069507Z[0m [32m INFO[0m [2mrpc[0m[2m:[0m received method in on_request starknet_chainId
+[2m2025-02-11T10:43:51.075471Z[0m [32m INFO[0m [2mrpc[0m[2m:[0m received method in on_request starknet_specVersion
+[2m2025-02-11T10:43:51.090387Z[0m [32m INFO[0m [2mrpc[0m[2m:[0m received method in on_request devnet_getPredeployedAccounts
+[2m2025-02-11T10:43:51.100805Z[0m [32m INFO[0m [2mrpc[0m[2m:[0m received method in on_request starknet_getClassAt

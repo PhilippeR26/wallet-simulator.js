@@ -1,6 +1,6 @@
 {
   "name": "starknet-wallet-simulator",
-  "version": "1.0.0",
+  "version": "6.0.0",
   "description": "Starknet.js WalletAccount simulator",
   "types": "dist/types/index.d.ts",
   "main": "./dist/cjs/index.js",
@@ -51,6 +51,6 @@
   },
   "dependencies": {
     "@starknet-io/types-js": "^0.7.10",
-    "starknet": "^6.23.0"
+    "starknet": "6.23.1"
   }
 }

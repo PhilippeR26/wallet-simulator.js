@@ -2,7 +2,7 @@ import type { RequestFn, WALLET_API, WalletEventListener, RpcMessage, RequestFnC
 import type { Account, RpcProvider } from "starknet";
 import  {  constants } from "starknet";
 import type { WalletBehavior } from "./WalletBehavior";
-import type { RequestParams } from "./types";
+import type { RequestParams, UserBehaviorState } from "./types";
 
 export class WalletSimulator implements WALLET_API.StarknetWindowObject {
     readonly id: string;
@@ -21,6 +21,8 @@ export class WalletSimulator implements WALLET_API.StarknetWindowObject {
     public on: WalletEventListener;
 
     public off: WalletEventListener;
+
+    readonly user:UserBehaviorState ;
 
     private mainnetProvider: RpcProvider;
 
@@ -75,9 +77,7 @@ export class WalletSimulator implements WALLET_API.StarknetWindowObject {
                 wallet_addDeclareTransaction: async (params?: ApiVersionRequest): Promise<ChainId> => {
                     return "0x1234"
                 },
-                wallet_addInvokeTransaction: async (params?: ApiVersionRequest): Promise<ChainId> => {
-                    return "0x1234"
-                },
+                wallet_addInvokeTransaction: walletDefinition.addInvokeTransaction,
                 wallet_signTypedData: async (params?: ApiVersionRequest): Promise<ChainId> => {
                     return "0x1234"
                 },
@@ -98,6 +98,7 @@ export class WalletSimulator implements WALLET_API.StarknetWindowObject {
                     accountTestnet: this.accountTestnet,
                     mainnetProvider: this.mainnetProvider,
                     testnetProvider: this.testnetProvider,
+                    userContext:this.user
                 } };
                 // console.log(parameters);
                 return handler(parameters)
@@ -108,8 +109,9 @@ export class WalletSimulator implements WALLET_API.StarknetWindowObject {
         this.on = walletDefinition.on;
         this.off = walletDefinition.off;
         this.currentNetwork = constants.NetworkName.SN_SEPOLIA;
+        this.user=walletDefinition.userState;
     }
 
-    prout() { }
+    userBehavior() { }
 
 };
